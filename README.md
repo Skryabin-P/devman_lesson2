@@ -12,7 +12,7 @@ pip install -r requirements.txt
 ### Environment variables
 - TOKEN
 1. Create `.env` file near script.py
-2. Write there `TOKEN=YOUR_TOKEN_FROM_BITLY` and save
+2. Write there `BITLY_API_TOKEN=YOUR_TOKEN_FROM_BITLY` and save
 
 ## Run
 
