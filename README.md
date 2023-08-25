@@ -9,6 +9,7 @@ Python3 should be already installed. Then use pip (or pip3, if there is a confli
 ```bash
 pip install -r requirements.txt
 ```
+It's recommended to use virtual enviroment for project isolation
 ### Environment variables
 - TOKEN
 1. Create `.env` file near script.py
@@ -19,20 +20,15 @@ pip install -r requirements.txt
 Launch on Linux(Python 3) or Windows:
 
 ```bash
-$ python script.py
+$ python script.py YOUR_URL
 ```
+
 
 You will see:
 ```
-$ Enter your url address:https://bit.ly/3E7rHjX
-```
+(venv) PS ..\devman_lesson2> python script.py https://bit.ly/3OPqBy2
+Total clicks on https://bit.ly/3OPqBy2 is 1
 
-Enter either an url you want to be short or your `bit.ly` link to get clicks number 
-
-You will see:
-```
-Enter your url address: https://bit.ly/3E7rHjX
-Total clicks on https://bit.ly/3E7rHjX is 2
 ```
 
 

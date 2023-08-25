@@ -3,6 +3,7 @@ import json
 from urllib.parse import urlparse
 import os
 from dotenv import load_dotenv
+import argparse
 
 
 def shorten_link(token: str, link: str):
@@ -44,7 +45,11 @@ def is_bitlink(token: str, url: str):
 def main():
     load_dotenv()
     bitly_api_token = os.environ['BITLY_API_TOKEN']
-    link = input("Enter your url address:")
+    parser = argparse.ArgumentParser(description='Creates bitlink or gets'
+                                                 ' clicks count from bitlink')
+    parser.add_argument('link', help='Bitlink url or another url')
+    args = parser.parse_args()
+    link = args.link
 
     if is_bitlink(bitly_api_token, link):
         try:
