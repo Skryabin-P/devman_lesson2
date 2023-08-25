@@ -12,9 +12,9 @@ def shorten_link(token: str, link: str):
     payload = {"long_url": link}
     response = requests.post(api_url, headers=header, json=payload)
     response.raise_for_status()
-    new_bitlink_info = response.json()
-    bitlink = new_bitlink_info["link"]
-    return bitlink
+    new_bitlink = response.json()
+    new_bitlink_url = new_bitlink["link"]
+    return new_bitlink_url
 
 
 def count_clicks(token: str, link: str):
@@ -31,20 +31,22 @@ def count_clicks(token: str, link: str):
     return clicks_number
 
 
-def is_bitlink(token:str,url: str):
+def is_bitlink(token: str, url: str):
     parsed_url = urlparse(url)
     header = {'Authorization': f'Bearer {token}'}
-    response = requests.get(f'https://api-ssl.bitly.com/v4/bitlinks/{parsed_url.netloc}{parsed_url.path}',headers=header)
-    if response.ok:
-        return True
-    return False
+    endpoint = 'v4/bitlinks/'
+    bitlink = f'{parsed_url.netloc}{parsed_url.path}'
+    response = requests.get(f'https://api-ssl.bitly.com/{endpoint}{bitlink}',
+                            headers=header)
+    return response.ok
+
 
 def main():
     load_dotenv()
     bitly_api_token = os.environ['BITLY_API_TOKEN']
     link = input("Enter your url address:")
 
-    if is_bitlink(bitly_api_token,link):
+    if is_bitlink(bitly_api_token, link):
         try:
             clicks_number = count_clicks(bitly_api_token, link)
             print(f'Total clicks on {link} is {clicks_number}')
@@ -56,6 +58,7 @@ def main():
             print("Your Bitlink is", bitlink)
         except requests.exceptions.HTTPError as error:
             print(f'Remote host returns an error :\n {error}')
+
 
 if __name__ == "__main__":
     main()
